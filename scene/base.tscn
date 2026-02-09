@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://cxxxas4unspyk"]
+
+[ext_resource type="Texture2D" uid="uid://cpsx70sal8v8x" path="res://icon.svg" id="1_lsuyn"]
+[ext_resource type="Script" uid="uid://dhnx01iq6ym6c" path="res://scripts/statemachine/StateMachine.gd" id="2_h2qnr"]
+[ext_resource type="Script" uid="uid://bc5xpe7o72x6j" path="res://scripts/statemachine/idle_state.gd" id="3_4x2f7"]
+[ext_resource type="Script" uid="uid://c4y4pdh4uwwo0" path="res://scripts/statemachine/move_state.gd" id="4_twei1"]
+[ext_resource type="Script" uid="uid://ctsw4atda3h11" path="res://scripts/statemachine/jump_state.gd" id="5_ttdrg"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vanxo"]
+distance = -582.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oebcw"]
+radius = 20.0
+height = 50.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_vanxo")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(585.5, 612)
+scale = Vector2(9.0234375, 0.46875)
+texture = ExtResource("1_lsuyn")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(188, 516)
+scale = Vector2(0.3359375, 0.3671875)
+texture = ExtResource("1_lsuyn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(188, 515)
+shape = SubResource("CapsuleShape2D_oebcw")
+
+[node name="StateMachine" type="Node" parent="CharacterBody2D" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_h2qnr")
+initial_state = NodePath("IdleState")
+metadata/_custom_type_script = "uid://dhnx01iq6ym6c"
+
+[node name="IdleState" type="Node" parent="CharacterBody2D/StateMachine"]
+script = ExtResource("3_4x2f7")
+metadata/_custom_type_script = "uid://bc5xpe7o72x6j"
+
+[node name="MoveState" type="Node" parent="CharacterBody2D/StateMachine"]
+script = ExtResource("4_twei1")
+metadata/_custom_type_script = "uid://c4y4pdh4uwwo0"
+
+[node name="JumpState" type="Node" parent="CharacterBody2D/StateMachine"]
+script = ExtResource("5_ttdrg")
+metadata/_custom_type_script = "uid://ctsw4atda3h11"
