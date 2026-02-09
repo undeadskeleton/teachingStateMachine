@@ -7,7 +7,10 @@ func enter():
 
 func physics_update(delta: float)-> void:
 	var character = state_machine.get_parent()
-	character.velocity.y+=delta *980
+	if !character.is_on_floor():
+		character.velocity.y+=delta *980
+		character.move_and_slide()
+	
 	
 func handle_input(event: InputEvent)-> void:
 	if Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right"):

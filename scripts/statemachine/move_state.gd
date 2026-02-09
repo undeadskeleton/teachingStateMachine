@@ -7,6 +7,9 @@ func enter():
 	
 func physics_update(delta: float)-> void:
 	var character = state_machine.get_parent()
+	if !character.is_on_floor():
+		character.velocity.y+=delta *980
+		
 	var direction = Input.get_axis("ui_right","ui_left")
 	
 	if direction == 0:
