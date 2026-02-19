@@ -5,6 +5,7 @@ class_name StateMachine
 @export var initial_state: State
 var current_state: State
 var states : Dictionary = {}
+@export var joystick : VirtualJoystickPlus
 
 func _ready() -> void:
 	#Register all the states 

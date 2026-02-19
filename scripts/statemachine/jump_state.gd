@@ -3,7 +3,7 @@ extends State
 class_name JumpState
 
 func enter():
-	print("Entering jumpstate")
+	#print("Entering jumpstate")
 	var character = state_machine.get_parent()
 	character.velocity.y = -400
 	
