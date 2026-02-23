@@ -17,11 +17,13 @@ func physics_update(delta: float)-> void:
 	if joydir.x!=0 or direction!=0:
 		#print("inside :",joydir.x)
 		if joydir.x:
-			character.velocity.x = joydir.x * 200
 			lastdir= sign(joydir.x)
+			print(lastdir)
+			character.velocity.x = joydir.x * 200
 		elif direction:
-			character.velocity.x = -direction * 200
 			lastdir=sign(direction)
+			print(lastdir)
+			character.velocity.x = -direction * 200
 	elif direction == 0 or joydir.x == 0:
 		state_machine.change_state("idlestate")
 		return
@@ -31,4 +33,7 @@ func physics_update(delta: float)-> void:
 func handle_input(event: InputEvent)-> void:
 	if Input.is_action_just_pressed("ui_up"):
 		state_machine.change_state("jumpstate")
+	if Input.is_action_just_pressed("dash"):
+		state_machine.change_state("dashstate")
+	
 	

@@ -7,6 +7,7 @@ var current_state: State
 var states : Dictionary = {}
 @export var joystick : VirtualJoystickPlus
 
+
 func _ready() -> void:
 	#Register all the states 
 	for child in get_children():

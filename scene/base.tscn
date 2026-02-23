@@ -1,13 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://cxxxas4unspyk"]
+[gd_scene load_steps=13 format=3 uid="uid://cxxxas4unspyk"]
 
 [ext_resource type="Texture2D" uid="uid://cpsx70sal8v8x" path="res://icon.svg" id="1_lsuyn"]
 [ext_resource type="Script" uid="uid://dhnx01iq6ym6c" path="res://scripts/statemachine/StateMachine.gd" id="2_h2qnr"]
 [ext_resource type="Script" uid="uid://bc5xpe7o72x6j" path="res://scripts/statemachine/idle_state.gd" id="3_4x2f7"]
 [ext_resource type="Script" uid="uid://c4y4pdh4uwwo0" path="res://scripts/statemachine/move_state.gd" id="4_twei1"]
 [ext_resource type="Script" uid="uid://ctsw4atda3h11" path="res://scripts/statemachine/jump_state.gd" id="5_ttdrg"]
+[ext_resource type="Script" uid="uid://d3n4lh05i1ode" path="res://scene/node.gd" id="6_k4whl"]
 [ext_resource type="Script" uid="uid://dcgl3idbddxnq" path="res://addons/virtual_joystick_plus/virtual_joystick_plus.gd" id="6_ttdrg"]
 [ext_resource type="Texture2D" uid="uid://bp8vtlktxaufb" path="res://addons/virtual_joystick_plus/resources/textures/joystick_texture_5.png" id="7_h21lv"]
 [ext_resource type="Texture2D" uid="uid://dpiqhpk2imsjd" path="res://addons/virtual_joystick_plus/resources/textures/stick_texture_5.png" id="8_k4whl"]
+[ext_resource type="Texture2D" uid="uid://csmay4djeyxhr" path="res://Assets/images.png" id="9_h21lv"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vanxo"]
 distance = -582.0
@@ -57,6 +59,11 @@ metadata/_custom_type_script = "uid://c4y4pdh4uwwo0"
 script = ExtResource("5_ttdrg")
 metadata/_custom_type_script = "uid://ctsw4atda3h11"
 
+[node name="DashState" type="Node" parent="CharacterBody2D/StateMachine"]
+script = ExtResource("6_k4whl")
+dash_speed = 600.0
+dash_time = 0.2
+
 [node name="CanvasLayer" type="CanvasLayer" parent="CharacterBody2D"]
 
 [node name="VirtualJoystickPlus" type="Control" parent="CharacterBody2D/CanvasLayer"]
@@ -74,12 +81,19 @@ joystick_texture = ExtResource("7_h21lv")
 stick_texture = ExtResource("8_k4whl")
 metadata/_custom_type_script = "uid://dcgl3idbddxnq"
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="CharacterBody2D/CanvasLayer"]
+[node name="JumpButton" type="TouchScreenButton" parent="CharacterBody2D/CanvasLayer"]
 modulate = Color(1, 1, 1, 0.14117648)
 position = Vector2(1010, 502)
 texture_normal = ExtResource("1_lsuyn")
 texture_pressed = ExtResource("1_lsuyn")
 action = "ui_up"
+
+[node name="DashButton" type="TouchScreenButton" parent="CharacterBody2D/CanvasLayer"]
+modulate = Color(1, 1, 1, 0.16078432)
+position = Vector2(840, 501)
+scale = Vector2(0.30872482, 0.28635347)
+texture_normal = ExtResource("9_h21lv")
+action = "dash"
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 position = Vector2(190, 518)
