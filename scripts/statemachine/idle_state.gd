@@ -3,7 +3,7 @@ extends State
 class_name IdleState
 
 func enter():
-	#print("Entering idle State")
+	print("Entering idle State")
 	pass
 
 func physics_update(delta: float)-> void:
@@ -11,7 +11,9 @@ func physics_update(delta: float)-> void:
 	if !character.is_on_floor():
 		character.velocity.y+=delta *980
 		character.move_and_slide()
-	
+		
+	if !lastdir:
+		lastdir=1
 	
 func handle_input(event: InputEvent)-> void:
 	var joydir = state_machine.joystick.value
@@ -19,3 +21,6 @@ func handle_input(event: InputEvent)-> void:
 		state_machine.change_state("movestate")
 	if Input.is_action_just_pressed("ui_up"):
 		state_machine.change_state("jumpstate")
+	if Input.is_action_just_pressed("dash"):
+		print("Dash pressed")
+		state_machine.change_state("dashstate")

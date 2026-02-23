@@ -5,7 +5,7 @@ class_name State
 var state_machine: StateMachine
 
 #Virtual methods that child states can override
-
+var lastdir: int
 func enter()-> void:
 	#for initialization
 	pass

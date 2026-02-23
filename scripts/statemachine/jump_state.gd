@@ -5,7 +5,7 @@ class_name JumpState
 func enter():
 	#print("Entering jumpstate")
 	var character = state_machine.get_parent()
-	character.velocity.y = -400
+	character.velocity.y = -800
 	
 func physics_update(delta: float)-> void:
 	var character = state_machine.get_parent()
@@ -15,7 +15,13 @@ func physics_update(delta: float)-> void:
 	
 	#Handle horizontal movement
 	var direction = Input.get_axis("ui_left","ui_right")
-	character.velocity.x = direction * 200
+	var joydir = state_machine.joystick.value
+	
+	if joydir.x!=0 or direction!=0:
+		if joydir.x!=0:
+			character.velocity.x = joydir.x *200
+		elif direction!=0:
+			character.velocity.x = direction * 200
 	
 	character.move_and_slide()
 	
