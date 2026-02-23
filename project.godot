@@ -21,7 +21,7 @@ config/icon="res://icon.svg"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/virtual_joystick_plus/plugin.cfg")
+enabled=PackedStringArray("res://addons/git_bash_here/plugin.cfg", "res://addons/virtual_joystick_plus/plugin.cfg")
 
 [input]
 
@@ -35,6 +35,10 @@ dash={
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
+
+[plugins]
+
+git_bash_here/shortcut=Resource("uid://df2ve8i42uprp", "res://addons/git_bash_here/git_bash_here_shortcut.tres")
 
 [rendering]
 
