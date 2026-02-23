@@ -1,13 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://cxxxas4unspyk"]
+[gd_scene format=3 uid="uid://cxxxas4unspyk"]
 
 [ext_resource type="Texture2D" uid="uid://cpsx70sal8v8x" path="res://icon.svg" id="1_lsuyn"]
 [ext_resource type="Script" uid="uid://dhnx01iq6ym6c" path="res://scripts/statemachine/StateMachine.gd" id="2_h2qnr"]
 [ext_resource type="Script" uid="uid://bc5xpe7o72x6j" path="res://scripts/statemachine/idle_state.gd" id="3_4x2f7"]
 [ext_resource type="Script" uid="uid://c4y4pdh4uwwo0" path="res://scripts/statemachine/move_state.gd" id="4_twei1"]
 [ext_resource type="Script" uid="uid://ctsw4atda3h11" path="res://scripts/statemachine/jump_state.gd" id="5_ttdrg"]
+[ext_resource type="Script" uid="uid://cxd63rf3lv8hi" path="res://scene/dash_state.gd" id="6_h21lv"]
 [ext_resource type="Script" uid="uid://dcgl3idbddxnq" path="res://addons/virtual_joystick_plus/virtual_joystick_plus.gd" id="6_ttdrg"]
 [ext_resource type="Texture2D" uid="uid://bp8vtlktxaufb" path="res://addons/virtual_joystick_plus/resources/textures/joystick_texture_5.png" id="7_h21lv"]
 [ext_resource type="Texture2D" uid="uid://dpiqhpk2imsjd" path="res://addons/virtual_joystick_plus/resources/textures/stick_texture_5.png" id="8_k4whl"]
+[ext_resource type="Texture2D" uid="uid://csmay4djeyxhr" path="res://Assets/images.png" id="10_k4whl"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vanxo"]
 distance = -582.0
@@ -16,70 +18,85 @@ distance = -582.0
 radius = 20.0
 height = 50.0
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" unique_id=1674580441]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1858875871]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=342850550]
 shape = SubResource("WorldBoundaryShape2D_vanxo")
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=1353582613]
 position = Vector2(585.5, 612)
 scale = Vector2(9.0234375, 0.46875)
 texture = ExtResource("1_lsuyn")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1485357632]
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=89158000]
 position = Vector2(188, 516)
 scale = Vector2(0.3359375, 0.3671875)
 texture = ExtResource("1_lsuyn")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1492475324]
 position = Vector2(188, 515)
 shape = SubResource("CapsuleShape2D_oebcw")
 
-[node name="StateMachine" type="Node" parent="CharacterBody2D" node_paths=PackedStringArray("initial_state", "joystick")]
+[node name="StateMachine" type="Node" parent="CharacterBody2D" unique_id=1945662416 node_paths=PackedStringArray("initial_state", "joystick")]
 script = ExtResource("2_h2qnr")
 initial_state = NodePath("IdleState")
 joystick = NodePath("../CanvasLayer/VirtualJoystickPlus")
 metadata/_custom_type_script = "uid://dhnx01iq6ym6c"
 
-[node name="IdleState" type="Node" parent="CharacterBody2D/StateMachine"]
+[node name="IdleState" type="Node" parent="CharacterBody2D/StateMachine" unique_id=1603888186]
 script = ExtResource("3_4x2f7")
 metadata/_custom_type_script = "uid://bc5xpe7o72x6j"
 
-[node name="MoveState" type="Node" parent="CharacterBody2D/StateMachine"]
+[node name="MoveState" type="Node" parent="CharacterBody2D/StateMachine" unique_id=1354078247]
 script = ExtResource("4_twei1")
 metadata/_custom_type_script = "uid://c4y4pdh4uwwo0"
 
-[node name="JumpState" type="Node" parent="CharacterBody2D/StateMachine"]
+[node name="JumpState" type="Node" parent="CharacterBody2D/StateMachine" unique_id=2068510384]
 script = ExtResource("5_ttdrg")
 metadata/_custom_type_script = "uid://ctsw4atda3h11"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="CharacterBody2D"]
+[node name="DashState" type="Node" parent="CharacterBody2D/StateMachine" unique_id=1563377001]
+script = ExtResource("6_h21lv")
+dash_speed = 1500.0
+dash_time = 0.5
 
-[node name="VirtualJoystickPlus" type="Control" parent="CharacterBody2D/CanvasLayer"]
+[node name="CanvasLayer" type="CanvasLayer" parent="CharacterBody2D" unique_id=216027868]
+
+[node name="VirtualJoystickPlus" type="Control" parent="CharacterBody2D/CanvasLayer" unique_id=832492399]
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 3
 anchors_preset = 0
-offset_left = -61.000015
-offset_top = 417.0
-offset_right = 238.99998
-offset_bottom = 717.0
-scale = Vector2(0.5557124, 0.60992926)
+offset_left = -17.999992
+offset_top = 612.0
+offset_right = 282.0
+offset_bottom = 912.0
+scale = Vector2(1.5008065, 1.4236172)
 pivot_offset = Vector2(150, 150)
 script = ExtResource("6_ttdrg")
+deadzone = 0.6
+scale_factor = 0.5
 joystick_texture = ExtResource("7_h21lv")
 stick_texture = ExtResource("8_k4whl")
 metadata/_custom_type_script = "uid://dcgl3idbddxnq"
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="CharacterBody2D/CanvasLayer"]
+[node name="Jump button" type="TouchScreenButton" parent="CharacterBody2D/CanvasLayer" unique_id=1874586452]
 modulate = Color(1, 1, 1, 0.14117648)
-position = Vector2(1010, 502)
+position = Vector2(1984, 713)
+scale = Vector2(1.7141114, 1.5252703)
 texture_normal = ExtResource("1_lsuyn")
 texture_pressed = ExtResource("1_lsuyn")
 action = "ui_up"
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+[node name="Dash Button" type="TouchScreenButton" parent="CharacterBody2D/CanvasLayer" unique_id=836825123]
+modulate = Color(1, 1, 1, 0.23921569)
+position = Vector2(1632, 709)
+scale = Vector2(0.56152123, 0.53243846)
+texture_normal = ExtResource("10_k4whl")
+action = "dash"
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1500745422]
 position = Vector2(190, 518)
